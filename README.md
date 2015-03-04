@@ -26,10 +26,20 @@ Now log4net and NLog are supported. Also Udp, Tcp and Amqp protocols are support
       <conversionPattern value="%message%newline" />
     </layout>
   </appender>
+  <appender name="GelfHttpAppender" type=" EasyGelf.Log4Net.GelfHttpAppender, EasyGelf.Log4Net">
+    <facility>Easy Gelf Example Application</facility>
+    <connectionUri value="https://graylog2.yourdomain.com:12201/gelf" />
+    <basicAuthenticationUsername value="test-username" />
+    <basicAuthenticationPassword value="test-password" />
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%message%newline" />
+    </layout>
+  </appender>
   <root>
     <level value="ALL" />
     <appender-ref ref="GelfUdpAppender" />
     <appender-ref ref="GelfAmqpAppender" />
+    <appender-ref ref="GelfHttpAppender" />
   </root>
 </log4net>
 ```                                

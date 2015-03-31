@@ -27,8 +27,6 @@ namespace EasyGelf.Log4Net
 
         protected override ITransport InitializeTransport(IEasyGelfLogger logger)
         {
-            var encoder = new CompositeEncoder(new GZipEncoder(), new ChunkingEncoder(new MessageBasedIdGenerator(), 8096));
-            
             var configuration = new HttpTransportConfiguration
                 {
                     ConnectionUri = ConnectionUri,

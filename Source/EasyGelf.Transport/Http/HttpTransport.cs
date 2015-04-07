@@ -16,6 +16,11 @@ namespace EasyGelf.Transport.Http {
 
         public void Send(GelfMessage message) {
             try {
+
+                // Ignore all SSL Certificates error(s)
+                ServicePointManager.ServerCertificateValidationCallback +=
+                                (sender, cert, chain, sslPolicyErrors) => true;
+
                 var request = (HttpWebRequest)WebRequest.Create(configuration.ConnectionUri);
                 request.Method = "POST";
                 request.ReadWriteTimeout = request.Timeout = configuration.Timeout;
@@ -44,7 +49,7 @@ namespace EasyGelf.Transport.Http {
                     throw;
                 }
             }
-            
+
         }
 
         public void Close() {
